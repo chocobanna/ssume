@@ -16,7 +16,7 @@ java {
 }
 
 application {
-    mainClass = 'com.example.editor.SwingEditorApp'
+    mainClass = 'com.choco.starsector.editor.Main'
 }
 
 tasks.withType(JavaCompile).configureEach {
