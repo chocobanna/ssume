@@ -1,0 +1,32 @@
+plugins {
+    id 'application'
+}
+
+group = 'com.example'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+application {
+    mainClass = 'com.example.editor.SwingEditorApp'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.named('jar') {
+    manifest {
+        attributes(
+            'Main-Class': application.mainClass.get()
+        )
+    }
+}
