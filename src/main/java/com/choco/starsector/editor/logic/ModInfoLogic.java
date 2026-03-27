@@ -1,11 +1,17 @@
 package com.choco.starsector.editor.logic;
 
+import com.choco.starsector.editor.model.ModInfo;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
 public class ModInfoLogic {
+
+    private final ObjectMapper mapper = new ObjectMapper()
+            .enable(SerializationFeature.INDENT_OUTPUT);
 
     // ========================
     // ID GENERATION
     // ========================
-
     public String generateId(String author, String name) {
         String a = sanitize(author);
         String n = sanitize(name);
@@ -24,59 +30,16 @@ public class ModInfoLogic {
     }
 
     // ========================
-    // JSON GENERATION
+    // JSON → OBJECT
     // ========================
-
-    public String generateJson(
-            String id,
-            String name,
-            String author,
-            int major,
-            int minor,
-            int patch,
-            String gameVersion,
-            String description
-    ) {
-        return String.format("""
-        {
-          "id": "%s",
-          "name": "%s",
-          "author": "%s",
-          "version": { "major": %d, "minor": %d, "patch": %d },
-          "gameVersion": "%s",
-          "description": "%s"
-        }
-        """,
-                id,
-                name,
-                author,
-                major,
-                minor,
-                patch,
-                gameVersion,
-                escape(description)
-        );
-    }
-
-    private String escape(String s) {
-        return s.replace("\"", "\\\"");
+    public ModInfo parse(String json) throws Exception {
+        return mapper.readValue(json, ModInfo.class);
     }
 
     // ========================
-    // BASIC JSON PARSE (still simple)
+    // OBJECT → JSON
     // ========================
-
-    public String extract(String json, String key) {
-        int i = json.indexOf("\"" + key + "\"");
-        if (i < 0) return "";
-
-        int start = json.indexOf(":", i) + 1;
-        int end = json.indexOf(",", start);
-
-        if (end < 0) end = json.indexOf("}", start);
-
-        return json.substring(start, end)
-                .replace("\"", "")
-                .trim();
+    public String toJson(ModInfo mod) throws Exception {
+        return mapper.writeValueAsString(mod);
     }
 }
