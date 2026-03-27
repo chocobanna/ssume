@@ -1,16 +1,57 @@
-# Compiled class file
+# ========================
+# Java / JVM
+# ========================
 *.class
-
-# Log file
 *.log
+hs_err_pid*
+replay_pid*
 
-# BlueJ files
-*.ctxt
+# ========================
+# Gradle
+# ========================
+.gradle/
+build/
+out/
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# Gradle wrapper (keep jar + properties, ignore binaries)
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
 
-# Package Files #
+# ========================
+# IDEs
+# ========================
+
+# IntelliJ / JetBrains
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# VS Code
+.vscode/
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# ========================
+# OS junk
+# ========================
+.DS_Store
+Thumbs.db
+
+# ========================
+# Archives / artifacts
+# ========================
 *.jar
 *.war
 *.nar
@@ -19,6 +60,16 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+# ========================
+# Nix
+# ========================
+result
+.direnv/
+.envrc
+
+# ========================
+# Temporary files
+# ========================
+*.tmp
+*.swp
+*~
